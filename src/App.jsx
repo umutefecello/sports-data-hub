@@ -16,8 +16,6 @@ function App() {
         setLeague("");
     };
 
-    console.log("App:", { sport, selected_sport, league_opt });
-    console.log("LeagueSelect:", { value: league, league_opt });
 
     return (
         <>
