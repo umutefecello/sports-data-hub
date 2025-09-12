@@ -9,11 +9,31 @@ export const sportsData= [
                 teams:[
                     {
                         id:"manc",
-                        name:"Manchester City"
+                        name:"Manchester City",
+                        players: [
+                            {
+                                id:"ErHa",
+                                name:"Erling Haaland"
+                            },
+                            {
+                                id:"OmMa",
+                                name:"Omar Marmoush"
+                            }
+                        ]
                     },
                     {
                         id:"liv",
-                        name:"Liverpool FC"
+                        name:"Liverpool FC",
+                        players: [
+                            {
+                                id:"MoSa",
+                                name:"Mohammed Salah"
+                            },
+                            {
+                                id:"FlWi",
+                                name:"Florian Wirtz"
+                            }
+                        ]
                     }
                 ]
             },
@@ -23,11 +43,31 @@ export const sportsData= [
                 teams:[
                     {
                         id:"fb",
-                        name:"Fenerbahçe"
+                        name:"Fenerbahçe",
+                        players: [
+                            {
+                                id:"UmEfÇe",
+                                name:"Umut Efe Çelik"
+                            },
+                            {
+                                id:"OğAy",
+                                name:"Oğuz Aydın"
+                            }
+                        ]
                     },
                     {
                         id:"bjk",
-                        name:"Beşiktaş"
+                        name:"Beşiktaş",
+                        players: [
+                            {
+                                id:"OrKö",
+                                name:"Orhun Kökçü"
+                            },
+                            {
+                                id:"MeGü",
+                                name:"Mert Günok"
+                            }
+                        ]
                     }
                 ]
             }
@@ -43,11 +83,31 @@ export const sportsData= [
                 teams:[
                     {
                         id:"lal",
-                        name:"Los Angeles Lakers"
+                        name:"Los Angeles Lakers",
+                        players: [
+                            {
+                                id:"LeJa",
+                                name:"Lebron James"
+                            },
+                            {
+                                id:"LuDo",
+                                name:"Luka Doncic"
+                            }
+                        ]
                     },
                     {
                         id:"gsw",
-                        name:"Golden State Warriors"
+                        name:"Golden State Warriors",
+                        players: [
+                            {
+                                id:"StCu",
+                                name:"Stephen Curry"
+                            },
+                            {
+                                id:"JiBu",
+                                name:"Jimmy Butler"
+                            }
+                        ]
                     }
                 ]
             },
@@ -57,11 +117,31 @@ export const sportsData= [
                 teams:[
                     {
                         id:"fb",
-                        name:"Fenerbahçe"
+                        name:"Fenerbahçe",
+                        players: [
+                            {
+                                id:"TaBi",
+                                name:"Tarık Biberovic"
+                            },
+                            {
+                                id:"ScWi",
+                                name:"Scottie Wilbekin"
+                            }
+                        ]
                     },
                     {
                         id:"bar",
-                        name:"Barcelona"
+                        name:"Barcelona",
+                        players: [
+                            {
+                                id:"KePu",
+                                name:"Kevin Punter"
+                            },
+                            {
+                                id:"NiLa",
+                                name:"Nicolas Laprovittola"
+                            }
+                        ]
                     }
                 ]
             }
