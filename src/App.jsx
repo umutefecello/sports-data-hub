@@ -23,6 +23,7 @@ function App() {
     return (
         <>
             <h1>Sport Stats App</h1>
+            <label>Sport: </label>
             <select value={sport} onChange={(e) => when_sport_change(e.target.value)}>
                 <option value="">---Select Sport for Stats---</option>
                 <option value="basketball">Basketball</option>

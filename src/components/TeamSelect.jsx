@@ -4,6 +4,7 @@ function TeamSelect({ value, onChange, options }) {
     const safe = options || [];
     return (
         <>
+            <p></p>
             <label>Team: </label>
             <select value={value} onChange={ (e) => onChange(e.target.value)}>
                 <option value="">-- Select a Team --</option>
