@@ -57,7 +57,7 @@ function App() {
             <p>Selected Sport: {selected_sport?.name || "None"}</p>
             <p>Selected League:{selected_league?.name || "None"}</p>
             <p>Selected Team:{ selected_team?.name || "None"}</p>
-            <p>Selected Team:{ selected_player?.name || "None"}</p>
+            <p>Selected Player:{ selected_player?.name || "None"}</p>
         </>
     );
 }
