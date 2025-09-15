@@ -21,7 +21,15 @@ function App() {
     const player_opt= selected_team?.players || [];
     const selected_player= player_opt.find((p) => p.id === player);
 
-    const when_sport_change = (value) => { setSport(value); setLeague(""); };
+    const when_sport_change = (s) =>{
+        setSport(s);
+        setLeague("");
+        setTeam("");
+        setPlayer("");
+        if( s === "american_football"){
+            setLeague("nfl");
+        }
+    };
     const when_league_change= (value) => { setLeague(value); setTeam(""); setPlayer(""); };
     const when_team_change= (value) => { setTeam(value); setPlayer(""); };
 
@@ -34,6 +42,8 @@ function App() {
                 <option value="">---Select Sport---</option>
                 <option value="basketball">Basketball</option>
                 <option value="football">Football</option>
+                <option value="volleyball">Volleyball</option>
+                <option value="american_football">American Football</option>
             </select>
 
             <LeagueSelect
