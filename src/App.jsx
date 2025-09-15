@@ -1,33 +1,68 @@
 import {useState} from "react";
-import { sportsData } from "./MockData";
 import LeagueSelect from "./components/LeagueSelect";
 import TeamSelect from "./components/TeamSelect.jsx";
 import PlayerSelect from "./components/PlayerSelect.jsx";
 
+const KEY= import.meta.env.VITE_API_KEY;
+
+
+const BASES = {
+    football : "https://v3.football.api-sports.io",
+    basketball : "https://v1.basketball.api-sports.io",
+    american_football: "https://v1.american-football.api-sports.io",
+    volleyball:"https://v1.volleyball.api-sports.io"
+}
+
+async function apiGet(base,path,params = {}){
+    const myUrl= new URL(path,base);
+    Object.entries(params).forEach(([k,v]) => myUrl.searchParams.set(k,v));
+
+    const res= await fetch(myUrl.toString(), {
+        headers: {"x-apisports-key": KEY},
+    });
+    if(!res.ok){
+        throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+    return res.json();
+}
+
+
+function adapt_leagues(resp=[]){
+    return resp.map((it) => ({id: String(it?.league?.id ?? ""), name: it?.league?.name ?? "",})).filter((x) => x.id && x.name);
+}
+
+
+
 function App() {
+
+    const [leagueOpt,setLeagueOpt]= useState([]);
+    const [leagueError,setLeagueError]= useState("");
+
     const [sport,setSport]= useState("");
     const [league,setLeague]= useState("");
     const [team,setTeam]=useState("");
     const [player,setPlayer]=useState("");
 
-    const selected_sport=sportsData.find( (s) => s.id === sport );
-    const league_opt= selected_sport ? selected_sport.leagues: [];
-
-    const selected_league= league_opt.find( (l) => l.id === league);
-
-    const team_opt= selected_league ? selected_league.teams:[];
-    const selected_team= team_opt.find( (t) => t.id === team);
-
-    const player_opt= selected_team?.players || [];
-    const selected_player= player_opt.find((p) => p.id === player);
-
-    const when_sport_change = (s) =>{
+    const when_sport_change = async (s) =>{
         setSport(s);
         setLeague("");
         setTeam("");
         setPlayer("");
-        if( s === "american_football"){
-            setLeague("nfl");
+        setLeagueOpt([]);
+        setLeagueError("");
+        if(!s) return;
+        const cur_base=BASES[s];
+        if(!cur_base){
+            setLeagueError("Invalid sport");
+            return;
+        }
+        try{
+            const params = s === "football" ? { current: true } : {};
+            const json = await apiGet(cur_base, "/leagues", params);
+            const leagues = adapt_leagues(json?.response) || [];
+            setLeagueOpt(leagues);
+        }catch (e) {
+            setLeagueError(e.message || "lEAGUE LOAD ERROR!!");
         }
     };
     const when_league_change= (value) => { setLeague(value); setTeam(""); setPlayer(""); };
@@ -49,25 +84,24 @@ function App() {
             <LeagueSelect
                 value={league}
                 onChange={when_league_change}
-                options={league_opt}
+                options={leagueOpt}
             />
 
             <TeamSelect
                 value={team}
                 onChange={when_team_change}
-                options={team_opt}
+                options={[]}
             />
 
             <PlayerSelect
                 value={player}
                 onChange={setPlayer}
-                options={player_opt}
+                options={[]}
             />
-
-            <p>Selected Sport: {selected_sport?.name || "None"}</p>
-            <p>Selected League:{selected_league?.name || "None"}</p>
-            <p>Selected Team:{ selected_team?.name || "None"}</p>
-            <p>Selected Player:{ selected_player?.name || "None"}</p>
+            {leagueError && <p style={{ color: "red" }}>{leagueError}</p>}
+            {!leagueError && sport && leagueOpt.length === 0 && (
+                <p>No leagues found for this sport.</p>
+            )}
         </>
     );
 }
